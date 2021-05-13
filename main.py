@@ -19,3 +19,8 @@ print_hi('Dr_run')
 print_hi('Ruslan')
 x = input('введите число:')
 print_hi(x)
+
+def split_string():
+    string = input('Введите строку: ')
+    return print(string.split())
+split_string()
