@@ -24,3 +24,7 @@ def split_string():
     string = input('Введите строку: ')
     return print(string.split())
 split_string()
+def ne_test_function():
+    print('test function for git')
+    return
+ne_test_function()
