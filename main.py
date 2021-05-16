@@ -4,40 +4,37 @@
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
    # Use a breakpoint in the code line below to debug your script.
 #     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-#
-#
-# # Press the green button in the gutter to run the script.
-# if __name__ == '__main__':
-#     print_hi('PyCharm')
-#
-# # See PyCharm help at https://www.jetbrains.com/help/pycharm/
-# print_hi('Dr_run')
-#
-# print_hi('Ruslan')
-# x = input('введите число:')
-# print_hi(x)
-#
-# def split_string():
-#     string = input('Введите строку: ')
-#     return print(string.split())
-# split_string()
-# def ne_test_function():
-#     print('test function for git')
-#     return
-# ne_test_function()
-
-from faces import Fases
-from faces import  Changeable
+import numpy as np
+from scipy import sparse
+file_path = '/Users/ruslan/Code/GeometricalFlow/octahedron.txt'
 from faces import fases
+Fases = []
+with open(file_path) as fl_wth_fs:
+    lines = fl_wth_fs.readlines()
 
-# all_fases = [MyContainer(1,3,7),MyContainer(3,12,1)]
-# print('номер вершины из списка граней', all_fases[0].cf(2))
-# print('номер из отдельно созданной грани', granm.cf(0))
-# print(all_fases[2][2])
-# print('попытка вывести номер вершины грани  из строки:', granm(0)[1])
-
-Fas = fases(1,2,3)
-# print(Fas[0])
-print(Fas[0])
-list_fases = (fases(1,2,3),fases(4,5,6))
-print(list_fases[1][8])
+for line in lines:
+    ns_vx = line.rstrip('\n').split('\t') ## получили только числа из каждой строки
+    a = int(ns_vx[0])
+    b = int(ns_vx[1])
+    c = int(ns_vx[2])
+    Fases.append(fases(a,b,c))
+row =[0,0,1,3,1,0,0]
+col = [0,2,1,3,1,0,0]
+data = []
+# for fs in Fases:
+#     row.append(fs[0])
+#     col.append(fs[1])
+#     row.append(fs[0])
+#     col.append(fs[2])
+#     row.append(fs[1])
+#     col.append(fs[2])
+#     break
+[data.append(1) for i in range(len(row))]
+spacerow = np.array(row)
+spacecol = np.array(col)
+sparcedata = np.array(data)
+A = sparse.coo_matrix((sparcedata,(spacerow,spacecol)),shape=(4,4))
+print(row)
+print(col)
+print(data)
+print(A)
