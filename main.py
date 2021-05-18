@@ -2,39 +2,43 @@
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-   # Use a breakpoint in the code line below to debug your script.
-#     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-import numpy as np
-from scipy import sparse
-file_path = '/Users/ruslan/Code/GeometricalFlow/octahedron.txt'
-from faces import fases
-Fases = []
-with open(file_path) as fl_wth_fs:
-    lines = fl_wth_fs.readlines()
+# Use a breakpoint in the code line below to debug your script.
+import random
 
-for line in lines:
-    ns_vx = line.rstrip('\n').split('\t') ## получили только числа из каждой строки
+import scipy.sparse
+
+from faces import Faces
+from smeg_matrix import *
+
+file_path = '/Users/ruslan/Code/GeometricalFlow/octahedron.txt'
+VERTEX = 6  # количество вершин в многограннике
+EDGES = 12  # количество ребер в многограннике
+FACES = 8  # количестов граней в многограннике
+TIMES = 10000  # количество шагов по времени
+list_faces = []  # список, который будет содержать все грани
+with open(file_path) as fl_wth_fs:  # выгрузим из файла все номера вершин
+    lines = fl_wth_fs.readlines()
+for line in lines:  # все номера вершин загоним в списко файлов
+    ns_vx = line.rstrip('\n').split('\t')  # получили только числа из каждой строки
     a = int(ns_vx[0])
     b = int(ns_vx[1])
     c = int(ns_vx[2])
-    Fases.append(fases(a,b,c))
-row =[0,0,1,3,1,0,0]
-col = [0,2,1,3,1,0,0]
-data = []
-# for fs in Fases:
-#     row.append(fs[0])
-#     col.append(fs[1])
-#     row.append(fs[0])
-#     col.append(fs[2])
-#     row.append(fs[1])
-#     col.append(fs[2])
-#     break
-[data.append(1) for i in range(len(row))]
-spacerow = np.array(row)
-spacecol = np.array(col)
-sparcedata = np.array(data)
-A = sparse.coo_matrix((sparcedata,(spacerow,spacecol)),shape=(4,4))
-print(row)
-print(col)
-print(data)
-print(A)
+    list_faces.append(Faces(a, b, c))
+conformal_weights = np.zeros((VERTEX, TIMES), float)  # конформные веса в вершинах
+gauss_curve = adjacency_matrix(list_faces, VERTEX)  # гауссова кривизна в вершинах многогранника
+length_matrix = adjacency_matrix(list_faces, VERTEX)  # матрица смежности длин рёбер
+for i in range(0, VERTEX):
+    conformal_weights[i, 0] = 1
+    # print(conformal_weights[i, 0])
+a = length_matrix.nonzero()
+
+for i in range(0,len(a[0])):
+    row = a[0] # список все индексов в строке, которые
+    col = a[1]
+    length_matrix[row[i],col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
+
+# print(length_matrix.nonzero())
+# for i,j in length_matrix.row , length_matrix.col:
+#     i = random.randrange(1,10,1) + 0.1*random.randrange(0,9,1)
+# print(length_matrix)
+# print(gauss_curve)
