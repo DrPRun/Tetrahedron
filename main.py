@@ -29,16 +29,17 @@ gauss_curve = adjacency_matrix(list_faces, VERTEX)  # гауссова крив�
 length_matrix = adjacency_matrix(list_faces, VERTEX)  # матрица смежности длин рёбер
 for i in range(0, VERTEX):
     conformal_weights[i, 0] = 1
-    # print(conformal_weights[i, 0])
-a = length_matrix.nonzero()
-
-for i in range(0,len(a[0])):
-    row = a[0] # список все индексов в строке, которые
-    col = a[1]
-    length_matrix[row[i],col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
-
-# print(length_matrix.nonzero())
-# for i,j in length_matrix.row , length_matrix.col:
-#     i = random.randrange(1,10,1) + 0.1*random.randrange(0,9,1)
+# заполним матрицу длин рёбер случайными наборами чисел
+for i in range(0, length_matrix.count_nonzero()):
+    row, col = length_matrix.nonzero()  # список все индексов в строке, которые
+    length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
+# for j in range(0, gauss_curve.count_nonzero()):
+#     row, col = gauss_curve.nonzero()
+#     print(row[j], col[j], gauss_curve[row[j], col[j]])
+# for i in range(0, VERTEX, 1):
+#     for j in range(0, VERTEX, 1):
+#         print(gauss_curve[i, j], end=' ')
+#     print('\r')
 # print(length_matrix)
 # print(gauss_curve)
+gauss_curve_calculate(length_matrix, VERTEX)
