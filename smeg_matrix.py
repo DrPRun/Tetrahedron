@@ -28,12 +28,20 @@ def adjacency_matrix(faces, vertex):
     return adj_max
 
 def gauss_curve_calculate(matrix_length, vertex):
-    initial_curve = np.full(vertex, 2*3.14) # создаем массив данных с одинаковыми значениями
-    # for i in range(0, vertex):
-    #     initial_curve[i] = 2*3.14
+    row , col = matrix_length.nonzero()
+    dictinary_vertex = {}
+    dictinary_gauss = {}
     for j in range(0, matrix_length.count_nonzero()):
-        row, col = matrix_length.nonzero()
-
-        print(row[j], col[j], matrix_length[row[j], col[j]])
-    # print(initial_curve)
-
+        if row[j] not in dictinary_vertex.keys():
+            dictinary_vertex[row[j]] = [col[j]]
+        else:
+            dictinary_vertex[row[j]].append(col[j])
+    for key, val in dictinary_vertex.items():
+        list_of_adjency_vertex = []
+        for i in val:
+            for j in val:
+                if (matrix_length[i,j] != 0 and matrix_length[j,i] != 0):
+                    list_of_adjency_vertex.append(sorted([i,j]))
+        dictinary_gauss[key] = list(map(list, { tuple(x) for x in list_of_adjency_vertex } ))
+        # print(list_of_adjency_vertex)
+    print(dictinary_gauss)

@@ -43,3 +43,6 @@ for i in range(0, length_matrix.count_nonzero()):
 # print(length_matrix)
 # print(gauss_curve)
 gauss_curve_calculate(length_matrix, VERTEX)
+example_list = [(1,2),(2,3),(1,2)]
+uniquexample = set(example_list)
+print(uniquexample)
