@@ -33,16 +33,4 @@ for i in range(0, VERTEX):
 for i in range(0, length_matrix.count_nonzero()):
     row, col = length_matrix.nonzero()  # список все индексов в строке, которые
     length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
-# for j in range(0, gauss_curve.count_nonzero()):
-#     row, col = gauss_curve.nonzero()
-#     print(row[j], col[j], gauss_curve[row[j], col[j]])
-# for i in range(0, VERTEX, 1):
-#     for j in range(0, VERTEX, 1):
-#         print(gauss_curve[i, j], end=' ')
-#     print('\r')
-# print(length_matrix)
-# print(gauss_curve)
-gauss_curve_calculate(length_matrix, VERTEX)
-example_list = [(1,2),(2,3),(1,2)]
-uniquexample = set(example_list)
-print(uniquexample)
+# print(gauss_curve_calculate(length_matrix))
