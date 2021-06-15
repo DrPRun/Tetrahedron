@@ -35,4 +35,5 @@ for i in range(0, length_matrix.count_nonzero()):
     row, col = length_matrix.nonzero()  # список все индексов в строке, которые
     length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
 print('hello')
+print('hello_added_commit')
 # print(gauss_curve_calculate(length_matrix))
