@@ -10,7 +10,8 @@ import scipy.sparse
 from faces import Faces
 from smeg_matrix import *
 
-file_path = '/Users/ruslan/Code/GeometricalFlow/octahedron.txt'
+
+file_path = '/Users/ruslanpepa/PycharmProjects/testrin-pycharm/octahedron.txt'
 VERTEX = 6  # количество вершин в многограннике
 EDGES = 12  # количество ребер в многограннике
 FACES = 8  # количестов граней в многограннике
@@ -33,4 +34,5 @@ for i in range(0, VERTEX):
 for i in range(0, length_matrix.count_nonzero()):
     row, col = length_matrix.nonzero()  # список все индексов в строке, которые
     length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
+print('hello')
 # print(gauss_curve_calculate(length_matrix))

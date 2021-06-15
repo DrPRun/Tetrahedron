@@ -3,7 +3,7 @@
 import numpy as np
 from scipy import sparse
 
-
+# функция, которая создает матрицу смежности
 def adjacency_matrix(faces, vertex):
     row = []
     col = []
@@ -52,4 +52,4 @@ def gauss_curve_calculate(matrix_length):
             c = matrix_length[v[0], key]
             gauss_curve[key] -= np.arccos((b**2 + c**2 - a**2) / (2 * c * b))
     return (gauss_curve)
-# def сayley_ьenger_determinant():
+# def сayley_menger_determinant():
