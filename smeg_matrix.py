@@ -44,6 +44,7 @@ def gauss_curve_calculate(matrix_length):
                 if matrix_length[i, j] != 0 and matrix_length[j, i] != 0:
                     list_of_adjency_vertex.append(sorted([i, j]))
         dictinary_gauss[key] = list(map(list, {tuple(x) for x in list_of_adjency_vertex}))
+    print(dictinary_vertex)
     gauss_curve = np.full(len(dictinary_gauss), 2 * 3.14, )
     for key, val in dictinary_gauss.items():
         for v in val:
@@ -64,13 +65,16 @@ def сayley_menger_determinant(mtx_length, vtx):
         for j in range(0, num_vertex):
             if (i == j):
                 cayle_menger_matrix[i, j ] = 0
-            elif (i == 0 or j == 0 ):
-                cayle_menger_matrix[i , j ] = 1.
-                cayle_menger_matrix[j , i]  = 1
+            elif (i == 0  ):
+                cayle_menger_matrix[i, j ] = 1.
+            elif j == 0:
+                cayle_menger_matrix[i, j] = 1.
             else:
-                cayle_menger_matrix[i , j] = mtx_length[i-1 , j -1] ** 2
-
-    return cayle_menger_matrix
+                cayle_menger_matrix[i, j] = mtx_length[i-1, j -1] ** 2
+    print(cayle_menger_matrix)
+    determinant = np.linalg.det(cayle_menger_matrix)
+    print( 'determinant:', determinant)
+    return determinant
 
 
 

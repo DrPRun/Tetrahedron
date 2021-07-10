@@ -42,7 +42,8 @@ while caley_menger != None:
         length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1 * random.randrange(0, 9, 1)
     caley_menger = gauss_curve_calculate(length_matrix)
 print(sum(gauss_curve_calculate(length_matrix)))
-print(length_matrix, VERTEX)
+print(сayley_menger_determinant(length_matrix, VERTEX) )
+# print(length_matrix, VERTEX)p
 # print(length_matrix.toarray())
 # print('len_matrix', len(length_matrix))
 # print(caley_menger(length_matrix))
