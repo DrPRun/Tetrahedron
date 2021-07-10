@@ -29,7 +29,7 @@ def adjacency_matrix(faces, vertex):
 
 
 def gauss_curve_calculate(matrix_length):
-    row, col = matrix_length.nonzero()
+    row, col = matrix_length.nonzero() # в
     dictinary_vertex = {}  # вспомогательный словарь, ключ -- номер вершины, значение -- список вершин, смежных с ключом
     dictinary_gauss = {}  # ключ -- вершина, значение -- пара вершин, которая с ключевой формирует грань
     for j in range(0, matrix_length.count_nonzero()):
@@ -50,6 +50,31 @@ def gauss_curve_calculate(matrix_length):
             a = matrix_length[v[0], v[1]]
             b = matrix_length[v[1], key]
             c = matrix_length[v[0], key]
-            gauss_curve[key] -= np.arccos((b**2 + c**2 - a**2) / (2 * c * b))
+            val_arccos = (b**2 + c**2 - a**2) / (2 * c * b)
+            if (1 < val_arccos or val_arccos < -1):
+                return  None
+            else:
+                gauss_curve[key] -= np.arccos(val_arccos)
+
     return (gauss_curve)
-# def сayley_menger_determinant():
+def сayley_menger_determinant(mtx_length, vtx):
+    num_vertex = vtx + 1
+    cayle_menger_matrix = np.zeros((num_vertex, num_vertex), float)
+    for i in range(0, num_vertex):
+        for j in range(0, num_vertex):
+            if (i == j):
+                cayle_menger_matrix[i, j ] = 0
+            elif (i == 0 or j == 0 ):
+                cayle_menger_matrix[i , j ] = 1.
+                cayle_menger_matrix[j , i]  = 1
+            else:
+                cayle_menger_matrix[i , j] = mtx_length[i-1 , j -1] ** 2
+
+    return cayle_menger_matrix
+
+
+
+
+
+
+

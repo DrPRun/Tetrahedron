@@ -31,9 +31,22 @@ length_matrix = adjacency_matrix(list_faces, VERTEX)  # матрица смеж�
 for i in range(0, VERTEX):
     conformal_weights[i, 0] = 1
 # заполним матрицу длин рёбер случайными наборами чисел
-for i in range(0, length_matrix.count_nonzero()):
-    row, col = length_matrix.nonzero()  # список все индексов в строке, которые
-    length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
-print('hello')
-print('hello_added_commit')
-# print(gauss_curve_calculate(length_matrix))
+# for i in range(0, length_matrix.count_nonzero()):
+#     row, col = length_matrix.nonzero()  # список все индексов в строке, которые
+#     length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1*random.randrange(0, 9, 1)
+# # print('hello')
+caley_menger = None
+while caley_menger != None:
+    for i in range(0, length_matrix.count_nonzero()):
+        row, col = length_matrix.nonzero()  # список все индексов в строке, которые
+        length_matrix[row[i], col[i]] = random.randrange(1, 10, 1) + 0.1 * random.randrange(0, 9, 1)
+    caley_menger = gauss_curve_calculate(length_matrix)
+print(sum(gauss_curve_calculate(length_matrix)))
+print(length_matrix, VERTEX)
+# print(length_matrix.toarray())
+# print('len_matrix', len(length_matrix))
+# print(caley_menger(length_matrix))
+# for i in range(0, VERTEX):
+#     for j in range(0, VERTEX):
+#         print(length_matrix[i,j],  ' ')
+#     print('\n')
